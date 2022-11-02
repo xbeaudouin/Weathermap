@@ -269,7 +269,7 @@ function myimagecolorallocate($image, $red, $green, $blue)
 	// it's possible that we're being called early - just return straight away, in that case
 	if(!isset($image)) return(-1);
 	
-	$existing=imagecolorexact($image, $red, $green, $blue);
+	$existing=imagecolorexact($image, (int)$red, (int)$green, (int)$blue);
 
 	if ($existing > -1)
 		return $existing;
