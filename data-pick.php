@@ -118,7 +118,7 @@ if(isset($_REQUEST['command']) && $_REQUEST["command"]=='link_step1')
 
 	function filterlist(previous)
 	{
-		var filterstring = $('input#filterstring').val().toUpperCase();	
+		var filterstring = $('input#filterstring').val();	
 		
 		if(filterstring=='')
 		{
@@ -160,16 +160,16 @@ if(isset($_REQUEST['command']) && $_REQUEST["command"]=='link_step1')
 
 	$(document).ready( function() {
 		$('span.filter').keyup(function() {
-			var previous = $('input#filterstring').val().toUpperCase();
+			var previous = $('input#filterstring').val();
 			setTimeout(function () {filterlist(previous)}, 500);
 		}).show();
 		$('span.ignore').click(function() {
-			var previous = $('input#filterstring').val().toUpperCase();
+			var previous = $('input#filterstring').val();
 			setTimeout(function () {filterlist(previous)}, 500);
 		});
 	});
 
-        function update_source_step2(graphid,name,portid,ifAlias,ifDesc,ifIndex,ifSpeed)
+        function update_source_step2(graphid,name,portid,ifAlias,ifDesc,ifIndex)
         {
                 var graph_url, hover_url;
 
@@ -184,12 +184,11 @@ if(isset($_REQUEST['command']) && $_REQUEST["command"]=='link_step1')
                         opener.document.forms["frmMain"].node_label.value ='testing';
                         opener.document.forms["frmMain"].link_infourl.value = info_url;
                         opener.document.forms["frmMain"].link_hover.value = graph_url;
-						opener.document.forms["frmMain"].link_bandwith_in.value = ipSpeed;
                 }
                 self.close();
         }
 
-	function update_source_step1(dataid,name,portid,ifAlias,ifDesc,ifIndex,ifSpeed)
+	function update_source_step1(dataid,name,portid,ifAlias,ifDesc,ifIndex)
 	{
 		// This must be the section that looks after link properties
 		var newlocation;
@@ -214,7 +213,7 @@ if(isset($_REQUEST['command']) && $_REQUEST["command"]=='link_step1')
 		if(document.forms['mini'].overlib.checked)
 		{
 
-        		window.onload = update_source_step2(dataid,name,portid,ifAlias,ifDesc,ifIndex,ifSpeed);
+        		window.onload = update_source_step2(dataid,name,portid,ifAlias,ifDesc,ifIndex);
 
 		}
 		else
@@ -286,7 +285,7 @@ if(isset($_REQUEST['command']) && $_REQUEST["command"]=='link_step1')
 	}
 
 	 // Link query
-     $hosts = \App\Models\Device::orderBy('hostname')->get(['device_id', 'hostname', 'sysname']);
+     $hosts = \App\Models\Device::orderBy('hostname')->get(['device_id', 'hostname']);
 ?>
 
 <h3>Pick a data source:</h3>
@@ -302,7 +301,7 @@ if($hosts->isNotEmpty()) {
 	{
 		print '<option ';
 		if($host_id==$host['device_id']) print " SELECTED ";
-		print 'value="'.$host['device_id'].'">'.$host['hostname'].'('.strtoupper($host['sysname']).')</option>';
+		print 'value="'.$host['device_id'].'">'.$host['hostname'].'</option>';
 	}
 	print '</select><br />';
 }
@@ -335,9 +334,9 @@ if($hosts->isNotEmpty()) {
             if (!is_null($device->ports)) {
                 foreach ($device->ports as $port) {
                     echo "<li class=\"row" . ($i % 2) . "\">";
-					$key = $device->device_id . "','" . $device->hostname . "','" . $port->port_id . "','" . addslashes($port->ifAlias) . "','" . addslashes($port->ifDescr) . "','" . (int)$port->ifIndex. "','" . $port->ifSpeed;
+                    $key = $device->device_id . "','" . $device->hostname . "','" . $port->port_id . "','" . addslashes($port->ifAlias) . "','" . addslashes($port->ifDescr) . "','" . (int)$port->ifIndex;
 
-					echo "<a href=\"#\" onclick=\"update_source_step1('$key')\">" . $device->displayName() . "<br/>".strtoupper($port->ifDescr)." <br/>Desc: ".strtoupper($port->ifAlias)." <br/> Speed: $port->ifSpeed</a>";
+                    echo "<a href=\"#\" onclick=\"update_source_step1('$key')\">" . $device->displayName() . "/$port->ifDescr Desc: $port->ifAlias</a>";
                     echo "</li>\n";
                 }
                 $i++;
@@ -373,7 +372,7 @@ if(isset($_REQUEST['command']) && $_REQUEST["command"]=='node_step1')
 		$host_id = intval($_REQUEST['host_id']);
 	}
 
-	$hosts = \App\Models\Device::orderBy('hostname')->get(['device_id AS id', 'hostname AS name', 'sysname AS sysname']);
+	 $hosts = \App\Models\Device::orderBy('hostname')->get(['device_id AS id', 'hostname AS name']);
 
 ?>
 <html>
@@ -383,7 +382,7 @@ if(isset($_REQUEST['command']) && $_REQUEST["command"]=='node_step1')
 
 	function filterlist(previous)
 	{
-		var filterstring = $('input#filterstring').val().toUpperCase();	
+		var filterstring = $('input#filterstring').val();	
 		
 		if(filterstring=='')
 		{
@@ -401,7 +400,7 @@ if(isset($_REQUEST['command']) && $_REQUEST["command"]=='node_step1')
 
 	$(document).ready( function() {
 		$('span.filter').keyup(function() {
-			var previous = $('input#filterstring').val().toUpperCase();
+			var previous = $('input#filterstring').val();
 			setTimeout(function () {filterlist(previous)}, 500);
 		}).show();
 	});
@@ -482,7 +481,7 @@ if($hosts->isNotEmpty()) {
 	{
 		print '<option ';
 		if($host_id==$host['id']) print " SELECTED ";
-		print 'value="'.$host['id'].'">'.$host['name'].'('.strtoupper($host['sysname']).')</option>';
+		print 'value="'.$host['id'].'">'.$host['name'].'</option>';
 	}
 	print '</select><br />';
 }
