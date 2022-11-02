@@ -960,8 +960,8 @@ class WeatherMap extends WeatherMapBase
                                 if ($multiply != 1) {
                                     wm_debug("Pre-multiply: $in $out\n");
 
-                                    $in = $multiply * $in;
-                                    $out = $multiply * $out;
+                                    $in = (int)$multiply * $in;
+                                    $out = (int)$multiply * $out;
 
                                     wm_debug("Post-multiply: $in $out\n");
                                 }
