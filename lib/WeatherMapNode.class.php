@@ -632,7 +632,7 @@ class WeatherMapNode extends WeatherMapItem
 			// if there's an icon, then you can choose to have no background
 			if(! $col->is_none() )
 			{
-			    imagefilledrectangle($node_im, $label_x1, $label_y1, $label_x2, $label_y2, $col->gdallocate($node_im));
+			    imagefilledrectangle($node_im, (int)$label_x1, (int)$label_y1, (int)$label_x2, (int)$label_y2, (int)($col->gdallocate($node_im)));
 			}
 
 			if ($this->selected)
@@ -646,7 +646,7 @@ class WeatherMapNode extends WeatherMapItem
 				$olcol = new Colour($this->labeloutlinecolour);
 				if ($olcol->is_real())
 				{
-					imagerectangle($node_im, $label_x1, $label_y1, $label_x2, $label_y2, $olcol->gdallocate($node_im));
+					imagerectangle($node_im, (int)$label_x1, (int)$label_y1, (int)$label_x2, (int)$label_y2, (int)($olcol->gdallocate($node_im)));
 				}
 			}
 			#}
