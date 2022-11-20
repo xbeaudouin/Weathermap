@@ -716,7 +716,7 @@ class WeatherMapNode extends WeatherMapItem
 		if(isset($this->image))
 		{
 			imagealphablending($im, true);
-			imagecopy ( $im, $this->image, $this->x - $this->centre_x, $this->y - $this->centre_y, 0, 0, imagesx($this->image), imagesy($this->image) );
+			imagecopy ( $im, $this->image, (int) ($this->x - $this->centre_x), (int) ($this->y - $this->centre_y), 0, 0, imagesx($this->image), imagesy($this->image) );
 		}
 
 	}
