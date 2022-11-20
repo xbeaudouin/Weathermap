@@ -56,7 +56,8 @@ $long_opts=array
 		"sizedebug",
 		"dumpconfig=",
         "daemon=",
-		"chdir="
+		"chdir=",
+		"rrdtool=",
 	);
 
 $args=$cg->readPHPArgv();
@@ -160,6 +161,10 @@ if (sizeof($gopts) > 0)
         case '--chdir':
 		    $chdir = $o[1];
             break;
+
+		case '--rrdtool':
+			$rrdtool = $o[1];
+			break;
 			
         case '--define':
             preg_match("/^([^=]+)=(.*)\s*$/",$o[1],$matches);
