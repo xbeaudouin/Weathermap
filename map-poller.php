@@ -80,6 +80,9 @@ if (is_dir($conf_dir))
                 {
                     $cmd = $cmd." --chdir ".$config['rrd_dir'];
                 }
+		if (!empty($config['rrdtool'])) {
+			$cmd = $cmd." --rrdtool ".$config['rrdtool'];
+		}
 
                 $fp = popen($cmd, 'r');
 
