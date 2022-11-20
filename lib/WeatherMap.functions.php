@@ -1907,7 +1907,8 @@ function wimagepolygon($image, $points, $num_points, $color)
 	
 	metadump("POLY $num_points ".$pts." $r $g $b $a");
 
-	return(imagepolygon($image, $points, $num_points, $color));
+	//return(imagepolygon($image, $points, $num_points, $color));
+	return(imagepolygon($image, $points, $color));
 }
 
 function wimagefilledpolygon($image, $points, $num_points, $color)
@@ -1927,7 +1928,8 @@ function wimagefilledpolygon($image, $points, $num_points, $color)
 	
 	metadump("FPOLY $num_points ".$pts." $r $g $b $a");
 
-	return(imagefilledpolygon($image, $points, $num_points, $color));
+	//return(imagefilledpolygon($image, $points, $num_points, $color));
+	return(imagefilledpolygon($image, $points, $color));
 }
 
 function wimagecreatetruecolor($width, $height)
